@@ -38,7 +38,7 @@ This plot takes one sentence and shows for the sentence,
 the words, the parts of speech tag and the dependency relationship between the words.
 }
 \examples{
-\dontrun{
+\donttest{
 library(udpipe)
 x <- udpipe("The economy is weak but the outlook is bright", "english")
 textplot_dependencyparser(x)

@@ -34,7 +34,7 @@ NULL
 #' data(example_btm, package = 'textplot')
 #'
 #' model <- example_btm
-#' \dontrun{
+#' \donttest{
 #' plot(model, title = "BTM model", top_n = 3)
 #' plot(model, title = "BTM model", top_n = 3, labels = 1:model$K)
 #' plot(model, title = "BTM model", which = 7:15)
@@ -57,7 +57,7 @@ NULL
 #'      which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
 #'      labels = topiclabels)
 #'
-#' \dontrun{
+#' \donttest{
 #' library(BTM)
 #' library(data.table)
 #' library(udpipe)
@@ -96,7 +96,7 @@ plot.BTM <- function(x,
   }
   if(!is.data.frame(biterms)){
     if(inherits(ok, "try-error")){
-      cat(ok)
+      warning(ok)
     }
     stop("Please provide in argument biterms a data.frame with columns term1, term2 and topic\nIf x is of class BTM and you are reloading a saved BTM model, you should have saved your biterms as well.")
   }
@@ -125,7 +125,7 @@ plot.BTM <- function(x,
 #' group_terms   <- terms(example_btm, top_n = 3)
 #' group_biterms <- example_btm$biterms$biterms
 #'
-#' \dontrun{
+#' \donttest{
 #' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms)
 #' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
 #'                         title = "BTM model", subtitle = "Topics 7-15",

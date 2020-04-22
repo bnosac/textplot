@@ -45,7 +45,7 @@ library(ggraph)
 data(example_btm, package = 'textplot')
 
 model <- example_btm
-\dontrun{
+\donttest{
 plot(model, title = "BTM model", top_n = 3)
 plot(model, title = "BTM model", top_n = 3, labels = 1:model$K)
 plot(model, title = "BTM model", which = 7:15)
@@ -68,7 +68,7 @@ plot(model, title = "Biterm topic model", subtitle = "some topics",
      which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
      labels = topiclabels)
 
-\dontrun{
+\donttest{
 library(BTM)
 library(data.table)
 library(udpipe)

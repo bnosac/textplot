@@ -16,7 +16,7 @@
 #' @seealso \code{\link[udpipe]{udpipe}}
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(udpipe)
 #' x <- udpipe("The economy is weak but the outlook is bright", "english")
 #' textplot_dependencyparser(x)

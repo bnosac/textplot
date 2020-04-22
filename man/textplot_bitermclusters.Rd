@@ -42,7 +42,7 @@ data(example_btm, package = 'textplot')
 group_terms   <- terms(example_btm, top_n = 3)
 group_biterms <- example_btm$biterms$biterms
 
-\dontrun{
+\donttest{
 textplot_bitermclusters(terminology = group_terms, biterms = group_biterms)
 textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
                         title = "BTM model", subtitle = "Topics 7-15",

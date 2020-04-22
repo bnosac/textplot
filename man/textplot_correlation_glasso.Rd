@@ -46,7 +46,7 @@ dtm <- dtm_remove_lowfreq(dtm, maxterms = 60)
 
 m <- dtm_cor(dtm)
 textplot_correlation_glasso(m, exclude_zero = TRUE)
-\dontrun{
+\donttest{
 textplot_correlation_glasso(m, exclude_zero = FALSE)
 }
 }

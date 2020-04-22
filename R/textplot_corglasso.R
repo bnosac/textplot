@@ -22,7 +22,7 @@
 #'
 #' m <- dtm_cor(dtm)
 #' textplot_correlation_glasso(m, exclude_zero = TRUE)
-#' \dontrun{
+#' \donttest{
 #' textplot_correlation_glasso(m, exclude_zero = FALSE)
 #' }
 textplot_correlation_glasso <- function(x, n = 1000, exclude_zero = TRUE, label.cex = 1, node.width = 0.5, ...){
