@@ -1,7 +1,7 @@
 Package: textplot
 Type: Package
 Title: Text Plots
-Version: 0.1.0
+Version: 0.1.1
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jwijffels@bnosac.be'), 
