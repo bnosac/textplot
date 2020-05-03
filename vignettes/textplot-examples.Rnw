@@ -5,7 +5,7 @@
 \author{Jan Wijffels}
 \Plainauthor{Jan Wijffels}
 \Abstract{
-The texplot R package allows one to visualise complex relations in texts. This is done by providing functionalities for displaying text co-occurrence networks, text correlation networks, dependency relationships as well as text clustering.
+The textplot R package allows one to visualise complex relations in texts. This is done by providing functionalities for displaying text co-occurrence networks, text correlation networks, dependency relationships as well as text clustering.
 In this vignette, some example visualisations of these are shown.}
 \Keywords{Text, network, co-occurrence, correlation, text clustering, dependency parsing, visualisation}
 \Plainkeywords{Text, network, co-occurrence, correlation, text clustering, dependency parsing, visualisation}
