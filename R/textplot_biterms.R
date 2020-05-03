@@ -29,6 +29,7 @@ NULL
 #' @method plot BTM
 #' @seealso \code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters}}
 #' @examples
+#' library(igraph)
 #' library(BTM)
 #' library(ggraph)
 #' data(example_btm, package = 'textplot')
@@ -120,6 +121,7 @@ plot.BTM <- function(x,
 #' @return an object of class ggplot
 #' @export
 #' @examples
+#' library(igraph)
 #' library(BTM)
 #' data(example_btm, package = 'textplot')
 #' group_terms   <- terms(example_btm, top_n = 3)
@@ -159,6 +161,7 @@ textplot_bitermclusters <- function(terminology, biterms,
   requireNamespace("ggforce")
   requireNamespace("concaveman")
   requireNamespace("ggplot2")
+  requireNamespace("igraph")
   donotdrawlabels <- missing(labels)
 
   ## We are only going to display biterms part of each topic which are using the top_n most emitted terms for each topic

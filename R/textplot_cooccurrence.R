@@ -13,6 +13,7 @@
 #' @export
 #' @examples
 #' library(udpipe)
+#' library(igraph)
 #' library(ggraph)
 #' data(brussels_reviews_anno, package = 'udpipe')
 #' x <- subset(brussels_reviews_anno, xpos %in% "JJ" & language %in% "fr")
@@ -31,6 +32,7 @@ textplot_cooccurrence <- function(data, terms, top_n = 50,
   cooc <- name <- NULL
   requireNamespace("ggraph")
   requireNamespace("ggplot2")
+  requireNamespace("igraph")
 
   stopifnot(is.data.frame(data))
   stopifnot(all(c("term1", "term2", "cooc") %in% colnames(data)))

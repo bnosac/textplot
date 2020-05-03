@@ -3,7 +3,6 @@
 #' @importFrom stats cor cov2cor terms
 #' @importFrom Matrix forceSymmetric nearPD tcrossprod crossprod colMeans diag
 #' @importFrom lattice dotplot panel.lines panel.dotplot panel.abline panel.text
-#' @importFrom igraph graph_from_data_frame
 #' @importFrom data.table rbindlist setDT setDF copy ":="
 #' @importFrom graphics par text arrows
 NULL

@@ -37,6 +37,7 @@ Plot biterms as a clustered graph.
 The graph is constructed by assigning each word to a topic and within a topic of words biterm frequencies are shown.
 }
 \examples{
+library(igraph)
 library(BTM)
 data(example_btm, package = 'textplot')
 group_terms   <- terms(example_btm, top_n = 3)

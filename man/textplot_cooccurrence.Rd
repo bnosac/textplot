@@ -43,6 +43,7 @@ Plot term cooccurrences in a graph structure
 }
 \examples{
 library(udpipe)
+library(igraph)
 library(ggraph)
 data(brussels_reviews_anno, package = 'udpipe')
 x <- subset(brussels_reviews_anno, xpos \%in\% "JJ" & language \%in\% "fr")

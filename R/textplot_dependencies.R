@@ -46,6 +46,7 @@ textplot_dependencyparser <- function(x,
   dep_rel <- token <- upos <- NULL
   requireNamespace("ggraph")
   requireNamespace("ggplot2")
+  requireNamespace("igraph")
 
   x <- x[!is.na(x$head_token_id), ]
   x <- x[x$sentence_id %in% min(x$sentence_id), ]

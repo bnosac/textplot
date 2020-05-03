@@ -48,6 +48,7 @@ The R package is distributed under the GPL-2 license.
 library(udpipe)
 library(textplot)
 library(ggraph)
+library(igraph)
 x <- udpipe("His speech about marshmallows in New York is utter bullshit",
             "english")
 plt <- textplot_dependencyparser(x, size = 4)
@@ -79,6 +80,7 @@ print(plt)
 library(BTM)
 library(ggraph)
 library(concaveman)
+library(igraph)
 data(example_btm, package = 'textplot')
 model <- example_btm
 plt <- plot(model, title = "BTM model", top_n = 5)
@@ -104,6 +106,7 @@ print(plt)
 library(BTM)
 library(data.table)
 library(udpipe)
+library(igraph)
 ## Annotate text with parts of speech tags
 data("brussels_reviews", package = "udpipe")
 anno <- subset(brussels_reviews, language %in% "nl")
@@ -128,6 +131,45 @@ plt
 <<fig=TRUE, echo=FALSE, width=8, height=6>>=
 print(plt)
 @
+
+\newpage
+\subsection{Biterm relationships}
+\subsubsection{Example showing objects of verbs and adjectives modifying nouns}
+
+<<>>=
+library(udpipe)
+library(data.table)
+library(ggraph)
+x <- merge(anno, anno,
+            by.x = c("doc_id", "paragraph_id", "sentence_id", "head_token_id"),
+            by.y = c("doc_id", "paragraph_id", "sentence_id", "token_id"),
+            all.x = TRUE, all.y = FALSE, suffixes = c("", "_parent"), sort = FALSE)
+x <- subset(x, dep_rel %in% c("obj", "amod"))
+x$topic <- factor(x$dep_rel)
+topiclabels <- levels(x$topic)
+x$topic <- as.integer(x$topic)
+## Construct biterms/terminology inputs to the plot
+biterms <- data.frame(term1 = x$lemma, term2 = x$lemma_parent,
+                      topic = x$topic, stringsAsFactors = FALSE)
+terminology <- document_term_frequencies(x, document = "topic",
+                                         term = c("lemma", "lemma_parent"))
+terminology <- document_term_frequencies_statistics(terminology)
+terminology <- terminology[order(terminology$tf_idf, decreasing = TRUE), ]
+terminology <- terminology[, head(.SD, 50), by = list(topic = doc_id)]
+terminology <- data.frame(topic = terminology$topic,
+                          token = terminology$term,
+                          probability = 1, stringsAsFactors = FALSE)
+plt <- textplot_bitermclusters(terminology, biterms,
+                               labels = topiclabels,
+                               title = "Objects of verbs and adjectives modifying nouns",
+                               subtitle = "Top 50 by group")
+plt
+@
+
+<<fig=TRUE, echo=FALSE, width=8, height=6>>=
+print(plt)
+@
+
 
 \newpage
 \subsection{Bar plots}
@@ -188,6 +230,7 @@ textplot_correlation_glasso(term_correlations, exclude_zero = TRUE)
 <<>>=
 library(udpipe)
 library(ggraph)
+library(igraph)
 data(brussels_reviews_anno, package = 'udpipe')
 x <- subset(brussels_reviews_anno, xpos %in% "JJ" & language %in% "fr")
 x <- cooccurrence(x, group = "doc_id", term = "lemma")
@@ -200,4 +243,37 @@ plt
 <<fig=TRUE, echo=FALSE, width=6, height=6>>=
 print(plt)
 @
+
+\subsubsection{Example showing objects of verbs / adjectives modifying nouns on our annotated dataset}
+<<eval=FALSE>>=
+library(udpipe)
+library(ggraph)
+library(igraph)
+library(data.table)
+data("brussels_reviews", package = "udpipe")
+anno <- subset(brussels_reviews, language %in% "nl")
+anno <- data.frame(doc_id = anno$id, text = anno$feedback, stringsAsFactors = FALSE)
+anno <- udpipe(anno, "dutch", trace = 10)
+@
+
+<<>>=
+biterms <- merge(anno, anno,
+            by.x = c("doc_id", "paragraph_id", "sentence_id", "head_token_id"),
+            by.y = c("doc_id", "paragraph_id", "sentence_id", "token_id"),
+            all.x = TRUE, all.y = FALSE, suffixes = c("", "_parent"), sort = FALSE)
+biterms <- setDT(biterms)
+biterms <- subset(biterms, dep_rel %in% c("obj", "amod"))
+biterms <- biterms[, list(cooc = .N), by = list(term1 = lemma, term2 = lemma_parent)]
+
+plt <- textplot_cooccurrence(biterms,
+                             title = "Objects of verbs and Adjectives modifying nouns", top_n = 75,
+                             vertex_color = "orange", edge_color = "black",
+                             fontface = "bold")
+plt
+@
+
+<<fig=TRUE, echo=FALSE, width=6, height=6>>=
+print(plt)
+@
+
 \end{document}
