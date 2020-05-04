@@ -2,9 +2,12 @@
 % Please edit documentation in R/textplot_bar.R
 \name{textplot_bar}
 \alias{textplot_bar}
+\alias{textplot_bar.default}
 \title{Barplot of a frequency table using lattice}
 \usage{
-textplot_bar(
+textplot_bar(x, ...)
+
+\method{textplot_bar}{default}(
   x,
   panel = "Effect",
   total = sum(x),
@@ -24,6 +27,8 @@ textplot_bar(
 }
 \arguments{
 \item{x}{a table to plot or a data.frame with the first column the label and the second column the frequency}
+
+\item{...}{other arguments passed on to \code{lattice::dotplot}}
 
 \item{panel}{character string what to put into the panel}
 
@@ -50,8 +55,6 @@ textplot_bar(
 \item{v}{passed on to \code{lattice::panel.abline} to draw a vertical line}
 
 \item{col.abline}{passed on to \code{lattice::panel.abline} to draw a vertical line}
-
-\item{...}{other arguments passed on to \code{lattice::dotplot}}
 }
 \value{
 the result of a call to \code{lattice::dotplot}

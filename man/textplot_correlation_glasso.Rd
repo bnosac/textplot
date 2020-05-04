@@ -2,9 +2,12 @@
 % Please edit documentation in R/textplot_corglasso.R
 \name{textplot_correlation_glasso}
 \alias{textplot_correlation_glasso}
+\alias{textplot_correlation_glasso.default}
 \title{Plot sparse term correlations as a graph structure}
 \usage{
-textplot_correlation_glasso(
+textplot_correlation_glasso(x, ...)
+
+\method{textplot_correlation_glasso}{default}(
   x,
   n = 1000,
   exclude_zero = TRUE,
@@ -16,6 +19,10 @@ textplot_correlation_glasso(
 \arguments{
 \item{x}{a correlation matrix}
 
+\item{...}{further arguments passed on to \code{qgraph::qgraph},
+except layout which is set to 'spring', labels (taken from the colnames of \code{x}),
+and borders which is set to FALSE.}
+
 \item{n}{sample size used in computing the sparse correlation matrix. Defaults to 1000.}
 
 \item{exclude_zero}{logical indicating to exclude zero-correlations from the graph}
@@ -23,10 +30,6 @@ textplot_correlation_glasso(
 \item{label.cex}{passed on to \code{qgraph::qgraph}}
 
 \item{node.width}{passed on to \code{qgraph::qgraph}}
-
-\item{...}{further arguments passed on to \code{qgraph::qgraph},
-except layout which is set to 'spring', labels (taken from the colnames of \code{x}),
-and borders which is set to FALSE.}
 }
 \value{
 an object of class ggplot

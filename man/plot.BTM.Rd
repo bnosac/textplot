@@ -94,5 +94,5 @@ plot(model)
 }
 }
 \seealso{
-\code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters}}
+\code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters.default}}
 }

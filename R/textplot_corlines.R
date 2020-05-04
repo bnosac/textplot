@@ -25,6 +25,15 @@ sparse_cor <- function (x) {
   cormat
 }
 
+
+#' @rdname textplot_correlation_lines
+#' @export
+textplot_correlation_lines <- function(x, ...){
+  UseMethod("textplot_correlation_lines")
+}
+
+
+#' @rdname textplot_correlation_lines
 #' @title Document/Term Correlation Plot
 #' @description Plots the highest occurring correlations among terms. \cr
 #' This is done by plotting the terms into nodes and the correlations between the terms as lines between the nodes.
@@ -92,16 +101,16 @@ sparse_cor <- function (x) {
 #' attrs$edge$color <- "steelblue"
 #' textplot_correlation_lines(dtm, top_n = 20, label = TRUE,
 #'                            attrs = attrs)
-textplot_correlation_lines <- function(x,
-                                       terms = colnames(x),
-                                       threshold = 0.05,
-                                       top_n,
-                                       attrs = textplot_correlation_lines_attrs(),
-                                       terms_highlight,
-                                       label = FALSE,
-                                       cex.label = 1,
-                                       col.highlight = "red",
-                                       lwd = 1, ...){
+textplot_correlation_lines.default <- function(x,
+                                               terms = colnames(x),
+                                               threshold = 0.05,
+                                               top_n,
+                                               attrs = textplot_correlation_lines_attrs(),
+                                               terms_highlight,
+                                               label = FALSE,
+                                               cex.label = 1,
+                                               col.highlight = "red",
+                                               lwd = 1, ...){
   requireNamespace("graph")
   requireNamespace("Rgraphviz")
 

@@ -2,9 +2,12 @@
 % Please edit documentation in R/textplot_corlines.R
 \name{textplot_correlation_lines}
 \alias{textplot_correlation_lines}
+\alias{textplot_correlation_lines.default}
 \title{Document/Term Correlation Plot}
 \usage{
-textplot_correlation_lines(
+textplot_correlation_lines(x, ...)
+
+\method{textplot_correlation_lines}{default}(
   x,
   terms = colnames(x),
   threshold = 0.05,
@@ -20,6 +23,8 @@ textplot_correlation_lines(
 }
 \arguments{
 \item{x}{a document-term matrix of class dgCMatrix}
+
+\item{...}{other arguments passed on to plot}
 
 \item{terms}{a character vector with terms present in the columns of \code{x} indicating terms to focus on}
 
@@ -41,8 +46,6 @@ how much (in percentage) to increase the node font size. See the examples.}
 \item{col.highlight}{color to use for highlighted terms specified in \code{terms_highlight}. Defaults to red.}
 
 \item{lwd}{numeric value - graphical parameter used to increase the edge thickness which indicates the correlation strength. Defaults to 1.}
-
-\item{...}{other arguments passed on to plot}
 }
 \value{
 invisibly the plot

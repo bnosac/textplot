@@ -1,6 +1,12 @@
 
+#' @rdname textplot_dependencyparser
+#' @export
+textplot_dependencyparser <- function(x, ...){
+  UseMethod("textplot_dependencyparser")
+}
 
 
+#' @rdname textplot_dependencyparser
 #' @title Plot output of a dependency parser
 #' @description Plot output of a dependency parser.
 #' This plot takes one sentence and shows for the sentence,
@@ -12,10 +18,12 @@
 #' @param edge_color character with the color of the edges between the nodes. Defaults to red.
 #' @param size size of the labels in the plot. Defaults to 3.
 #' @param base_family character passed on to \code{theme_void} setting the base font family
+#' @param ... not used yet
 #' @return an object of class ggplot
 #' @seealso \code{\link[udpipe]{udpipe}}
 #' @export
 #' @examples
+#' library(ggraph)
 #' \donttest{
 #' library(udpipe)
 #' x <- udpipe("The economy is weak but the outlook is bright", "english")
@@ -29,16 +37,16 @@
 #' textplot_dependencyparser(x, size = 4)
 #' }
 #'
-#' library(ggraph)
 #' data("example_udpipe", package = "textplot")
 #' textplot_dependencyparser(example_udpipe, size = 4)
-textplot_dependencyparser <- function(x,
-                                      title = "Dependency Parser",
-                                      subtitle = "tokenisation, parts of speech tagging & dependency relations",
-                                      vertex_color = "darkgreen",
-                                      edge_color = "red",
-                                      size = 3,
-                                      base_family = ""){
+textplot_dependencyparser.default <- function(x,
+                                              title = "Dependency Parser",
+                                              subtitle = "tokenisation, parts of speech tagging & dependency relations",
+                                              vertex_color = "darkgreen",
+                                              edge_color = "red",
+                                              size = 3,
+                                              base_family = "",
+                                              ...){
   stopifnot(is.data.frame(x) & all(c("sentence_id", "token_id", "head_token_id", "dep_rel",
                                      "token_id", "token", "upos") %in% colnames(x)))
 

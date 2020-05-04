@@ -19,6 +19,13 @@ rescaler <- function(x, from = range(x, na.rm = TRUE, finite = TRUE), to = c(0, 
   }
 }
 
+#' @rdname textplot_bar
+#' @export
+textplot_bar <- function(x, ...){
+  UseMethod("textplot_bar")
+}
+
+#' @rdname textplot_bar
 #' @title Barplot of a frequency table using lattice
 #' @description Barplot of a frequency table using lattice
 #' @param x a table to plot or a data.frame with the first column the label and the second column the frequency
@@ -57,7 +64,8 @@ rescaler <- function(x, from = range(x, na.rm = TRUE, finite = TRUE), to = c(0, 
 #' x <- data.frame(l = LETTERS, amount = rnorm(26))
 #' textplot_bar(x)
 #' textplot_bar(x, v = 0)
-textplot_bar <- function(x, panel = "Effect", total = sum(x), top = 40,
+#' @export
+textplot_bar.default <- function(x, panel = "Effect", total = sum(x), top = 40,
                          col.panel = "lightgrey", col.line="lightblue", lwd=3, cextext=0.5, addpct=FALSE, cexpct=0.75,
                          textpos = 3, pctpos = 1, v=NULL, col.abline = "red", ...){
   if(inherits(x, c("data.table", "data.frame"))){

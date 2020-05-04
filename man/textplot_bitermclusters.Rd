@@ -2,10 +2,13 @@
 % Please edit documentation in R/textplot_biterms.R
 \name{textplot_bitermclusters}
 \alias{textplot_bitermclusters}
+\alias{textplot_bitermclusters.default}
 \title{Plot biterm cluster groups}
 \usage{
-textplot_bitermclusters(
-  terminology,
+textplot_bitermclusters(x, ...)
+
+\method{textplot_bitermclusters}{default}(
+  x,
   biterms,
   which,
   labels = seq_len(length(table(biterms$topic))),
@@ -15,7 +18,9 @@ textplot_bitermclusters(
 )
 }
 \arguments{
-\item{terminology}{a list of data.frames, each containing the columns token and probability corresponding to how good a token is emitted by a topic. The list index is assumed to be the topic number}
+\item{x}{a list of data.frames, each containing the columns token and probability corresponding to how good a token is emitted by a topic. The list index is assumed to be the topic number}
+
+\item{...}{not used}
 
 \item{biterms}{a data.frame with columns term1, term2, topic with all biterms and the topic these were assigned to}
 
@@ -26,8 +31,6 @@ textplot_bitermclusters(
 \item{title}{character string with the title to use in the plot}
 
 \item{subtitle}{character string with the subtitle to use in the plot}
-
-\item{...}{not used}
 }
 \value{
 an object of class ggplot
@@ -38,23 +41,24 @@ The graph is constructed by assigning each word to a topic and within a topic of
 }
 \examples{
 library(igraph)
+library(ggraph)
+library(concaveman)
 library(BTM)
 data(example_btm, package = 'textplot')
 group_terms   <- terms(example_btm, top_n = 3)
 group_biterms <- example_btm$biterms$biterms
 
 \donttest{
-textplot_bitermclusters(terminology = group_terms, biterms = group_biterms)
-textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+textplot_bitermclusters(x = group_terms, biterms = group_biterms)
+textplot_bitermclusters(x = group_terms, biterms = group_biterms,
                         title = "BTM model", subtitle = "Topics 7-15",
                         which = 7:15, labels = seq_len(example_btm$K))
 
 group_terms   <- terms(example_btm, top_n = 10)
-textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+textplot_bitermclusters(x = group_terms, biterms = group_biterms,
                         title = "BTM model", subtitle = "Topics 1-5",
                         which = 1:5, labels = seq_len(example_btm$K))
 }
-library(ggraph)
 group_terms   <- terms(example_btm, top_n = 7)
 topiclabels <- c("Garbage",
   "Data Mining", "Gradient descent", "API's",
@@ -64,7 +68,7 @@ topiclabels <- c("Garbage",
   "Classification/Regression trees", "Text frequencies",
   "Neural / Deep learning", "Variable selection",
   "Text file handling", "Text matching", "Topic modelling")
-textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+textplot_bitermclusters(x = group_terms, biterms = group_biterms,
                         title = "Biterm topic model", subtitle = "some topics",
                         which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
                         labels = topiclabels)

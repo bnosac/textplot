@@ -27,7 +27,7 @@ NULL
 #' @return an object of class ggplot
 #' @export
 #' @method plot BTM
-#' @seealso \code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters}}
+#' @seealso \code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters.default}}
 #' @examples
 #' library(igraph)
 #' library(BTM)
@@ -88,7 +88,7 @@ plot.BTM <- function(x,
                      title = "Biterm topic model", subtitle = list(), ...){
   requireNamespace("BTM")
 
-  displayterms <- terms(x, top_n = top_n)
+  displayterms <- stats::terms(x, top_n = top_n)
   ok <- try({
     biterms <- force(biterms)
   }, silent = TRUE)
@@ -102,16 +102,24 @@ plot.BTM <- function(x,
     stop("Please provide in argument biterms a data.frame with columns term1, term2 and topic\nIf x is of class BTM and you are reloading a saved BTM model, you should have saved your biterms as well.")
   }
   if(missing(labels)){
-    textplot_bitermclusters(terminology = displayterms, biterms = biterms, which = which, title = title, subtitle = subtitle, ...)
+    textplot_bitermclusters(x = displayterms, biterms = biterms, which = which, title = title, subtitle = subtitle, ...)
   }else{
-    textplot_bitermclusters(terminology = displayterms, biterms = biterms, which = which, labels = labels, title = title, subtitle = subtitle, ...)
+    textplot_bitermclusters(x = displayterms, biterms = biterms, which = which, labels = labels, title = title, subtitle = subtitle, ...)
   }
 }
 
+
+#' @rdname textplot_bitermclusters
+#' @export
+textplot_bitermclusters <- function(x, ...){
+  UseMethod("textplot_bitermclusters")
+}
+
+#' @rdname textplot_bitermclusters
 #' @title Plot biterm cluster groups
 #' @description Plot biterms as a clustered graph.
 #' The graph is constructed by assigning each word to a topic and within a topic of words biterm frequencies are shown.
-#' @param terminology a list of data.frames, each containing the columns token and probability corresponding to how good a token is emitted by a topic. The list index is assumed to be the topic number
+#' @param x a list of data.frames, each containing the columns token and probability corresponding to how good a token is emitted by a topic. The list index is assumed to be the topic number
 #' @param biterms a data.frame with columns term1, term2, topic with all biterms and the topic these were assigned to
 #' @param which integer vector indicating to display only these topics. See the examples.
 #' @param labels a character vector of names. Should be of the same length as the number of topics in the data.
@@ -122,23 +130,24 @@ plot.BTM <- function(x,
 #' @export
 #' @examples
 #' library(igraph)
+#' library(ggraph)
+#' library(concaveman)
 #' library(BTM)
 #' data(example_btm, package = 'textplot')
 #' group_terms   <- terms(example_btm, top_n = 3)
 #' group_biterms <- example_btm$biterms$biterms
 #'
 #' \donttest{
-#' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms)
-#' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+#' textplot_bitermclusters(x = group_terms, biterms = group_biterms)
+#' textplot_bitermclusters(x = group_terms, biterms = group_biterms,
 #'                         title = "BTM model", subtitle = "Topics 7-15",
 #'                         which = 7:15, labels = seq_len(example_btm$K))
 #'
 #' group_terms   <- terms(example_btm, top_n = 10)
-#' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+#' textplot_bitermclusters(x = group_terms, biterms = group_biterms,
 #'                         title = "BTM model", subtitle = "Topics 1-5",
 #'                         which = 1:5, labels = seq_len(example_btm$K))
 #' }
-#' library(ggraph)
 #' group_terms   <- terms(example_btm, top_n = 7)
 #' topiclabels <- c("Garbage",
 #'   "Data Mining", "Gradient descent", "API's",
@@ -148,15 +157,13 @@ plot.BTM <- function(x,
 #'   "Classification/Regression trees", "Text frequencies",
 #'   "Neural / Deep learning", "Variable selection",
 #'   "Text file handling", "Text matching", "Topic modelling")
-#' textplot_bitermclusters(terminology = group_terms, biterms = group_biterms,
+#' textplot_bitermclusters(x = group_terms, biterms = group_biterms,
 #'                         title = "Biterm topic model", subtitle = "some topics",
 #'                         which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
 #'                         labels = topiclabels)
-textplot_bitermclusters <- function(terminology, biterms,
-                                    which, labels = seq_len(length(table(biterms$topic))),
-                                    title = "Biterm topic model", subtitle = list(), ...){
-  ## R CMD check happy
-  topic <- .N <- term1 <- term2 <- select <- best_topic <- cooc <- name <- x <- y <- probability <- NULL
+textplot_bitermclusters.default <- function(x, biterms,
+                                            which, labels = seq_len(length(table(biterms$topic))),
+                                            title = "Biterm topic model", subtitle = list(), ...){
   requireNamespace("ggraph")
   requireNamespace("ggforce")
   requireNamespace("concaveman")
@@ -166,12 +173,15 @@ textplot_bitermclusters <- function(terminology, biterms,
 
   ## We are only going to display biterms part of each topic which are using the top_n most emitted terms for each topic
   ## Assign each term to a topic for the time being
-  if(is.data.frame(terminology)){
-    displayterms <- data.table::copy(terminology)
-  }else if(is.list(terminology)){
-    displayterms <- data.table::rbindlist(terminology, idcol = "topic")
+  if(inherits(x, "data.frame")){
+    displayterms <- data.table::copy(x)
+  }else if(is.list(x)){
+    displayterms <- data.table::rbindlist(x, idcol = "topic")
     displayterms <- data.table::setDF(displayterms)
   }
+  ## R CMD check happy
+  topic <- .N <- term1 <- term2 <- select <- best_topic <- cooc <- name <- x <- y <- probability <- NULL
+
   if(!missing(which)){
     displayterms <- displayterms[displayterms$topic %in% which, ]
   }

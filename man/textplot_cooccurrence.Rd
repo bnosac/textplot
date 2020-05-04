@@ -2,10 +2,13 @@
 % Please edit documentation in R/textplot_cooccurrence.R
 \name{textplot_cooccurrence}
 \alias{textplot_cooccurrence}
+\alias{textplot_cooccurrence.default}
 \title{Plot term cooccurrences as a network}
 \usage{
-textplot_cooccurrence(
-  data,
+textplot_cooccurrence(x, ...)
+
+\method{textplot_cooccurrence}{default}(
+  x,
   terms,
   top_n = 50,
   title = "Term cooccurrences",
@@ -17,11 +20,13 @@ textplot_cooccurrence(
 )
 }
 \arguments{
-\item{data}{a data.frame with columns term1, term2 and cooc indicating how many times 2 terms are occurring together}
+\item{x}{a data.frame with columns term1, term2 and cooc indicating how many times 2 terms are occurring together}
+
+\item{...}{other parameters passed on to \code{ggraph::geom_node_text}}
 
 \item{terms}{a character vector with terms to only plot. Prevails compared to using \code{top_n}}
 
-\item{top_n}{integer indicating to show only the top n occurrences as in \code{head(data, n = top_n)}}
+\item{top_n}{integer indicating to show only the top n occurrences as in \code{head(x, n = top_n)}}
 
 \item{title}{character string with the title to use in the plot}
 
@@ -32,8 +37,6 @@ textplot_cooccurrence(
 \item{edge_color}{character with the color of the edges between the nodes. Defaults to grey.}
 
 \item{base_family}{character passed on to \code{theme_void} setting the base font family}
-
-\item{...}{other parameters passed on to \code{ggraph::geom_node_text}}
 }
 \value{
 an object of class ggplot

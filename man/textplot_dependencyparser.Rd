@@ -2,20 +2,26 @@
 % Please edit documentation in R/textplot_dependencies.R
 \name{textplot_dependencyparser}
 \alias{textplot_dependencyparser}
+\alias{textplot_dependencyparser.default}
 \title{Plot output of a dependency parser}
 \usage{
-textplot_dependencyparser(
+textplot_dependencyparser(x, ...)
+
+\method{textplot_dependencyparser}{default}(
   x,
   title = "Dependency Parser",
   subtitle = "tokenisation, parts of speech tagging & dependency relations",
   vertex_color = "darkgreen",
   edge_color = "red",
   size = 3,
-  base_family = ""
+  base_family = "",
+  ...
 )
 }
 \arguments{
 \item{x}{a data.frame as returned by a call to \code{\link[udpipe]{udpipe}} containing 1 sentence}
+
+\item{...}{not used yet}
 
 \item{title}{character string with the title to use in the plot}
 
@@ -38,6 +44,7 @@ This plot takes one sentence and shows for the sentence,
 the words, the parts of speech tag and the dependency relationship between the words.
 }
 \examples{
+library(ggraph)
 \donttest{
 library(udpipe)
 x <- udpipe("The economy is weak but the outlook is bright", "english")
@@ -51,7 +58,6 @@ x <- udpipe("UDPipe provides tokenization, tagging, lemmatization and
 textplot_dependencyparser(x, size = 4)
 }
 
-library(ggraph)
 data("example_udpipe", package = "textplot")
 textplot_dependencyparser(example_udpipe, size = 4)
 }

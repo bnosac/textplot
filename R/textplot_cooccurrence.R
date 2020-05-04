@@ -1,8 +1,16 @@
+
+#' @rdname textplot_cooccurrence
+#' @export
+textplot_cooccurrence <- function(x, ...){
+  UseMethod("textplot_cooccurrence")
+}
+
+#' @rdname textplot_cooccurrence
 #' @title Plot term cooccurrences as a network
 #' @description Plot term cooccurrences in a graph structure
-#' @param data a data.frame with columns term1, term2 and cooc indicating how many times 2 terms are occurring together
+#' @param x a data.frame with columns term1, term2 and cooc indicating how many times 2 terms are occurring together
 #' @param terms a character vector with terms to only plot. Prevails compared to using \code{top_n}
-#' @param top_n integer indicating to show only the top n occurrences as in \code{head(data, n = top_n)}
+#' @param top_n integer indicating to show only the top n occurrences as in \code{head(x, n = top_n)}
 #' @param title character string with the title to use in the plot
 #' @param subtitle character string with the subtitle to use in the plot
 #' @param vertex_color character with the color of the label of each node. Defaults to darkgreen.
@@ -23,24 +31,24 @@
 #' textplot_cooccurrence(x, top_n = 25, title = "Adjectives",
 #'                       vertex_color = "orange", edge_color = "black",
 #'                       fontface = "bold")
-textplot_cooccurrence <- function(data, terms, top_n = 50,
-                                  title = "Term cooccurrences", subtitle = list(),
-                                  vertex_color = "darkgreen",
-                                  edge_color = "grey",
-                                  base_family = "", ...){
+textplot_cooccurrence.default <- function(x, terms, top_n = 50,
+                                          title = "Term cooccurrences", subtitle = list(),
+                                          vertex_color = "darkgreen",
+                                          edge_color = "grey",
+                                          base_family = "", ...){
   ## R CMD check happy
   cooc <- name <- NULL
   requireNamespace("ggraph")
   requireNamespace("ggplot2")
   requireNamespace("igraph")
 
-  stopifnot(is.data.frame(data))
-  stopifnot(all(c("term1", "term2", "cooc") %in% colnames(data)))
+  stopifnot(is.data.frame(x))
+  stopifnot(all(c("term1", "term2", "cooc") %in% colnames(x)))
 
   if(missing(terms)){
-    x <- head(data, n = top_n)
+    x <- head(x, n = top_n)
   }else{
-    x <- data[data$term1 %in% terms & data$term2 %in% terms, ]
+    x <- x[x$term1 %in% terms & x$term2 %in% terms, ]
     if(!missing(top_n)){
       x <- head(x, n = top_n)
     }

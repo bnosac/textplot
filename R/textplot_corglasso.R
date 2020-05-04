@@ -1,3 +1,11 @@
+
+#' @rdname textplot_correlation_glasso
+#' @export
+textplot_correlation_glasso <- function(x, ...){
+  UseMethod("textplot_correlation_glasso")
+}
+
+#' @rdname textplot_correlation_glasso
 #' @title Plot sparse term correlations as a graph structure
 #' @description Plot sparse term correlations as a graph structure.
 #' Uses the glasso procedure (\code{glasso::glassopath}) to reduce the correlation matrix to retain only the
@@ -25,7 +33,7 @@
 #' \donttest{
 #' textplot_correlation_glasso(m, exclude_zero = FALSE)
 #' }
-textplot_correlation_glasso <- function(x, n = 1000, exclude_zero = TRUE, label.cex = 1, node.width = 0.5, ...){
+textplot_correlation_glasso.default <- function(x, n = 1000, exclude_zero = TRUE, label.cex = 1, node.width = 0.5, ...){
   m <- EBICglasso(x, n = n)
   m <- m$optnet
   idx <- apply(m, MARGIN=1, FUN=function(x) sum(x == 1) > 1 | any(x > 0 & x < 1))
