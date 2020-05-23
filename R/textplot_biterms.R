@@ -195,8 +195,10 @@ textplot_bitermclusters.default <- function(x, biterms,
   if(!missing(which)){
     biterms <- biterms[biterms$topic %in% which, ]
   }
-  biterms <- biterms[, list(best_topic = utils::head(base::names(base::sort(base::table(topic), decreasing = TRUE)), 1),
-                            cooc = .N), by = list(term1, term2)]
+  biterms <- biterms[, topic_freq := .N, by = list(term1, term2)]
+  biterms <- biterms[, list(best_topic = topic[which.max(topic_freq)], cooc = .N), by = list(term1, term2)]
+  # biterms <- biterms[, list(best_topic = utils::head(base::names(base::sort(base::table(topic), decreasing = TRUE)), 1),
+  #                           cooc = .N), by = list(term1, term2)]
 
   biterms <- biterms[biterms$term1 %in% displayterms$token & biterms$term2 %in% displayterms$token, ]
   biterms <- biterms[base::order(biterms$cooc, biterms$best_topic, decreasing = TRUE), ]
@@ -232,3 +234,10 @@ textplot_bitermclusters.default <- function(x, biterms,
     g + ggforce::geom_mark_hull(ggplot2::aes(x, y, group = topic, fill = topic, label = topic), concavity = 4, expand = ggplot2::unit(5, "mm"), alpha = 0.25)
   }
 }
+
+# most_frequent <- function(x){
+#   freq <- data.table::data.table(element = x)
+#   freq <- freq[, list(count = .N), by = list(element)]
+#   idx <- which.max(data.table::frank(freq$count, ties.method = 'first'))
+#   freq$element[idx]
+# }
