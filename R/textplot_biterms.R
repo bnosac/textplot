@@ -180,7 +180,7 @@ textplot_bitermclusters.default <- function(x, biterms,
     displayterms <- data.table::setDF(displayterms)
   }
   ## R CMD check happy
-  topic <- .N <- term1 <- term2 <- select <- best_topic <- cooc <- name <- x <- y <- probability <- NULL
+  topic <- .N <- term1 <- term2 <- select <- best_topic <- cooc <- name <- x <- y <- probability <- topic_freq <- NULL
 
   if(!missing(which)){
     displayterms <- displayterms[displayterms$topic %in% which, ]
