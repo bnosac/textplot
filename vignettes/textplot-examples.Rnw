@@ -24,7 +24,7 @@ In this vignette, some example visualisations of these are shown.}
 options(prompt = "R> ", continue = "+   ")
 options(prompt = " ", continue = "   ")
 set.seed(123456789)
-knitr::opts_chunk$set(message = FALSE, warnings = FALSE, fig.align="center")
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = "center")
 @
 
 \section{General}

@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' \dontshow{
-#' require(Rgraphviz)
+#' if(require(Rgraphviz))
 #' \{
 #' }
 #' textplot_correlation_lines_attrs()
