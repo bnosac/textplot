@@ -1,3 +1,7 @@
+## CHANGES IN textplot VERSION 0.1.3
+
+- Changes regarding running examples only if packages are available (in casu ggforce which depends on concaveman which depends on V8, which triggered these changes)
+
 ## CHANGES IN textplot VERSION 0.1.2
 
 - Move igraph package from Imports to Suggests
