@@ -47,7 +47,7 @@ The R package is distributed under the GPL-2 license.
 \subsection{Dependency Parser}
 \subsubsection{Example 1}
 This example visualises the result of a text annotation which provides parts of speech tags and dependency relationships.
-<<eval=(require(udpipe) && require(ggraph) && require(ggplot2) && require(igraph)), fig.width=10, fig.height=5>>=
+<<eval=(require(udpipe, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=10, fig.height=5>>=
 library(textplot)
 library(udpipe)
 library(ggraph)
@@ -62,7 +62,7 @@ plt
 \newpage
 \subsubsection{Example 2}
 The following visualisation displays the dependency parser results on some larger sentence. Note that this function works only on 1 sentence.
-<<eval=(require(udpipe) && require(ggraph) && require(ggplot2) && require(igraph)), fig.width=12, fig.height=6, out.width = '1\\textwidth', out.height = '0.5\\textwidth'>>=
+<<eval=(require(udpipe, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=12, fig.height=6, out.width = '1\\textwidth', out.height = '0.5\\textwidth'>>=
 x <- udpipe("UDPipe provides tokenization, tagging, lemmatization and
              dependency parsing of raw text", "english")
 plt <- textplot_dependencyparser(x, size = 4)
@@ -74,7 +74,7 @@ plt
 \subsection{Biterm Topic Model plots}
 \subsubsection{Example 1}
 This example shows plotting a biterm topic model which was pretrained and put in the package as an example.
-<<eval=(require(BTM) && require(ggraph) && require(ggforce) && require(concaveman) && require(igraph)), fig.width=8, fig.height=6, out.width = '\\textwidth'>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6, out.width = '\\textwidth'>>=
 library(BTM)
 library(ggraph)
 library(ggforce)
@@ -87,7 +87,7 @@ plt
 @
 
 \newpage
-<<eval=(require(BTM) && require(ggraph) && require(ggforce) && require(concaveman) && require(igraph)), fig.width=8, fig.height=6>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6>>=
 plt <- plot(model, title = "Biterm topic model", subtitle = "Topics 2 to 8",
             which = 2:8, top_n = 7)
 plt
@@ -96,12 +96,7 @@ plt
 
 \subsubsection{Example 2} \label{anno}
 This example shows building a biterm topic model on nouns, adjectives and proper nouns occurring in the neighbourhood of one another and next plotting this model.
-<<eval=(require(BTM) && require(ggraph) && require(ggforce) && require(concaveman) && require(igraph) && require(data.table) && require(udpipe)), results="hide", fig.width=8, fig.height=6>>=
-library(BTM)
-library(ggraph)
-library(ggforce)
-library(concaveman)
-library(igraph)
+<<eval=(require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), results="hide", fig.width=8, fig.height=6>>=
 library(data.table)
 library(udpipe)
 ## Annotate text with parts of speech tags
@@ -115,6 +110,13 @@ biterms <- biterms[, cooccurrence(x = lemma,
                                   relevant = upos %in% c("NOUN", "PROPN", "ADJ"),
                                   skipgram = 2),
                      by = list(doc_id)]
+@
+<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), results="hide", fig.width=8, fig.height=6>>=
+library(BTM)
+library(ggraph)
+library(ggforce)
+library(concaveman)
+library(igraph)
 ## Build the BTM model
 set.seed(123456)
 x <- subset(anno, upos %in% c("NOUN", "PROPN", "ADJ"))
@@ -130,7 +132,7 @@ plt
 \subsection{Biterm relationships}
 \subsubsection{Example showing objects of verbs and adjectives modifying nouns}
 The below example shows the objects of verbs as well as which adjectives modify nouns. These are displayed as 2 clusters. We start from the annotation of the AirBnB data shown in the previous section \ref{anno}.
-<<eval=(require(BTM) && require(ggraph) && require(ggforce) && require(concaveman) && require(igraph) && require(data.table) && require(udpipe)), fig.width=8, fig.height=8>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), fig.width=8, fig.height=8>>=
 library(BTM)
 library(ggraph)
 library(ggforce)
@@ -186,7 +188,7 @@ plt
 \subsection{Correlation of texts}
 \subsubsection{Top correlations above a certain threshold}
 Text correlcations are interesting to see, but as there are many, the below function allows one to visualise a subset of these, the ones with the highest correlations above a certain threshold.
-<<eval=(require(Rgraphviz) && require(udpipe) && require(graph)), fig.width=5, fig.height=5>>=
+<<eval=(require(Rgraphviz, quietly = TRUE) && require(udpipe, quietly = TRUE) && require(data.table, quietly = TRUE) && require(graph, quietly = TRUE)), fig.width=5, fig.height=5>>=
 library(graph)
 library(Rgraphviz)
 library(udpipe)
@@ -200,7 +202,7 @@ textplot_correlation_lines(dtm, top_n = 25, threshold = 0.01, lwd = 5, label = T
 \newpage
 \subsubsection{Correlations which are non-zero after fitting a glasso model}
 If you have text correlations, you can also fit a glasso model on it. This puts non-relevant correlations to zero, allowing one to plot the correlations in a straightforward way.
-<<eval=(require(udpipe) && require(qgraph) && require(glasso)), fig.width=6, fig.height=6>>=
+<<eval=(require(udpipe, quietly = TRUE) && require(data.table, quietly = TRUE) && require(qgraph, quietly = TRUE) && require(glasso, quietly = TRUE)), fig.width=6, fig.height=6>>=
 library(glasso)
 library(qgraph)
 library(udpipe)
@@ -220,7 +222,7 @@ textplot_correlation_glasso(term_correlations, exclude_zero = TRUE)
 \subsection{Co-occurrence of texts}
 \subsubsection{Example showing adjectives occurring in the same document}
 The following graph shows how frequently adjectives co-occur across all the documents.
-<<eval=(require(udpipe) && require(igraph) && require(ggraph) && require(ggplot2)), fig.width=6, fig.height=6, out.width = '0.75\\textwidth', out.height = '0.75\\textwidth'>>=
+<<eval=(require(udpipe, quietly = TRUE) && require(igraph, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE)), fig.width=6, fig.height=6, out.width = '0.75\\textwidth', out.height = '0.75\\textwidth'>>=
 library(udpipe)
 library(igraph)
 library(ggraph)
@@ -238,7 +240,7 @@ plt
 \subsubsection{Example showing objects of verbs / adjectives modifying nouns on our annotated dataset}
 The following graph shows a similar visualisation, but instead focussing on the frequency of objects of verbs and adjectives modifying a noun. For this, we start again from the annotation of the AirBnB data shown in the section  \ref{anno}.
 
-<<eval=(require(udpipe) && require(igraph) && require(ggraph) && require(ggplot2) && require(data.table)), fig.width=8, fig.height=6, out.width = '0.8\\textwidth', out.height = '0.6\\textwidth'>>=
+<<eval=(require(udpipe, quietly = TRUE) && require(igraph, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(data.table, quietly = TRUE)), fig.width=8, fig.height=6, out.width = '0.8\\textwidth', out.height = '0.6\\textwidth'>>=
 library(udpipe)
 library(igraph)
 library(ggraph)

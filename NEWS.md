@@ -1,4 +1,4 @@
-## CHANGES IN textplot VERSION 0.1.3
+## CHANGES IN textplot VERSION 0.1.4
 
 - Changes regarding running examples only if packages are available (in casu ggforce which depends on concaveman which depends on V8, which triggered these changes)
 
