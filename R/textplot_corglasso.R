@@ -21,7 +21,13 @@ textplot_correlation_glasso <- function(x, ...){
 #' @return an object of class ggplot
 #' @export
 #' @examples
+#' \dontshow{
+#' if(require(udpipe) && require(qgraph) && require(glasso))
+#' \{
+#' }
 #' library(udpipe)
+#' library(qgraph)
+#' library(glasso)
 #' data(brussels_reviews_anno, package = 'udpipe')
 #' x <- subset(brussels_reviews_anno, xpos %in% "NN" & language %in% "fr" & !is.na(lemma))
 #' x <- document_term_frequencies(x, document = "doc_id", term = "lemma")
@@ -32,6 +38,11 @@ textplot_correlation_glasso <- function(x, ...){
 #' textplot_correlation_glasso(m, exclude_zero = TRUE)
 #' \donttest{
 #' textplot_correlation_glasso(m, exclude_zero = FALSE)
+#' }
+#'
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
 #' }
 textplot_correlation_glasso.default <- function(x, n = 1000, exclude_zero = TRUE, label.cex = 1, node.width = 0.5, ...){
   m <- EBICglasso(x, n = n)

@@ -57,7 +57,12 @@ Lines of the edges are proportional to the correlation height.
 This uses the plot function for graphNEL objects (using the Rgraphviz package)
 }
 \examples{
+\dontshow{
+if(require(Rgraphviz) && require(udpipe) && require(graph))
+\{
+}
 ## Construct document/frequency/matrix
+library(graph)
 library(Rgraphviz)
 library(udpipe)
 data(brussels_reviews_anno, package = 'udpipe')
@@ -102,4 +107,9 @@ attrs$node$shape <- "rectangle"
 attrs$edge$color <- "steelblue"
 textplot_correlation_lines(dtm, top_n = 20, label = TRUE,
                            attrs = attrs)
+
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }

@@ -64,7 +64,6 @@ textplot_bar <- function(x, ...){
 #' x <- data.frame(l = LETTERS, amount = rnorm(26))
 #' textplot_bar(x)
 #' textplot_bar(x, v = 0)
-#' @export
 textplot_bar.default <- function(x, panel = "Effect", total = sum(x), top = 40,
                          col.panel = "lightgrey", col.line="lightblue", lwd=3, cextext=0.5, addpct=FALSE, cexpct=0.75,
                          textpos = 3, pctpos = 1, v=NULL, col.abline = "red", ...){

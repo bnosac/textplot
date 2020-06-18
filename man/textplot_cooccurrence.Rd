@@ -45,9 +45,14 @@ an object of class ggplot
 Plot term cooccurrences in a graph structure
 }
 \examples{
+\dontshow{
+if(require(udpipe) && require(igraph) && require(ggraph) && require(ggplot2))
+\{
+}
 library(udpipe)
 library(igraph)
 library(ggraph)
+library(ggplot2)
 data(brussels_reviews_anno, package = 'udpipe')
 x <- subset(brussels_reviews_anno, xpos \%in\% "JJ" & language \%in\% "fr")
 x <- cooccurrence(x, group = "doc_id", term = "lemma")
@@ -56,4 +61,9 @@ textplot_cooccurrence(x, top_n = 25, subtitle = "showing only top 25")
 textplot_cooccurrence(x, top_n = 25, title = "Adjectives",
                       vertex_color = "orange", edge_color = "black",
                       fontface = "bold")
+
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }

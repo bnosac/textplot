@@ -4,7 +4,15 @@
 #' @return a list with graph visualisation elements used by \code{\link{textplot_correlation_lines}}
 #' @export
 #' @examples
+#' \dontshow{
+#' require(Rgraphviz)
+#' \{
+#' }
 #' textplot_correlation_lines_attrs()
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 textplot_correlation_lines_attrs <- function(fontsize = 25){
   attrs <- Rgraphviz::getDefaultAttrs()
   attrs$graph$rankdir <- "LR"
@@ -56,7 +64,12 @@ textplot_correlation_lines <- function(x, ...){
 #' @return invisibly the plot
 #' @export
 #' @examples
+#' \dontshow{
+#' if(require(Rgraphviz) && require(udpipe) && require(graph))
+#' \{
+#' }
 #' ## Construct document/frequency/matrix
+#' library(graph)
 #' library(Rgraphviz)
 #' library(udpipe)
 #' data(brussels_reviews_anno, package = 'udpipe')
@@ -101,6 +114,11 @@ textplot_correlation_lines <- function(x, ...){
 #' attrs$edge$color <- "steelblue"
 #' textplot_correlation_lines(dtm, top_n = 20, label = TRUE,
 #'                            attrs = attrs)
+#'
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 textplot_correlation_lines.default <- function(x,
                                                terms = colnames(x),
                                                threshold = 0.05,

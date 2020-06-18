@@ -11,8 +11,15 @@ are part of the NaturalLanguageProcessing and MachineLearning task views.\cr
 Timepoint of creation was 2020-04-10.
 }
 \examples{
+\dontshow{if(require(BTM))
+\{
+}
 library(BTM)
-data(example_btm)
+data(example_btm, package = 'textplot')
 example_btm
 str(example_btm)
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }

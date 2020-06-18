@@ -16,5 +16,13 @@ a list with graph visualisation elements used by \code{\link{textplot_correlatio
 Document/Term Correlation Plot graphical attributes
 }
 \examples{
+\dontshow{
+require(Rgraphviz)
+\{
+}
 textplot_correlation_lines_attrs()
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }

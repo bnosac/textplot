@@ -40,7 +40,13 @@ Uses the glasso procedure (\code{glasso::glassopath}) to reduce the correlation 
 relevant correlations and next visualises these sparse correlations.
 }
 \examples{
+\dontshow{
+if(require(udpipe) && require(qgraph) && require(glasso))
+\{
+}
 library(udpipe)
+library(qgraph)
+library(glasso)
 data(brussels_reviews_anno, package = 'udpipe')
 x <- subset(brussels_reviews_anno, xpos \%in\% "NN" & language \%in\% "fr" & !is.na(lemma))
 x <- document_term_frequencies(x, document = "doc_id", term = "lemma")
@@ -51,5 +57,10 @@ m <- dtm_cor(dtm)
 textplot_correlation_glasso(m, exclude_zero = TRUE)
 \donttest{
 textplot_correlation_glasso(m, exclude_zero = FALSE)
+}
+
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
 }
 }

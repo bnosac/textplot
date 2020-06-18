@@ -44,9 +44,15 @@ This plot takes one sentence and shows for the sentence,
 the words, the parts of speech tag and the dependency relationship between the words.
 }
 \examples{
-library(ggraph)
-\donttest{
+\dontshow{
+if(require(udpipe) && require(ggraph) && require(ggplot2) && require(igraph))
+\{
+}
 library(udpipe)
+library(ggraph)
+library(ggplot2)
+library(igraph)
+\donttest{
 x <- udpipe("The economy is weak but the outlook is bright", "english")
 textplot_dependencyparser(x)
 
@@ -60,6 +66,11 @@ textplot_dependencyparser(x, size = 4)
 
 data("example_udpipe", package = "textplot")
 textplot_dependencyparser(example_udpipe, size = 4)
+
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }
 \seealso{
 \code{\link[udpipe]{udpipe}}

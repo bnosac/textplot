@@ -40,9 +40,16 @@ Plot biterms as a clustered graph.
 The graph is constructed by assigning each word to a topic and within a topic of words biterm frequencies are shown.
 }
 \examples{
+\dontshow{
+if(require(igraph) && require(BTM) && require(ggraph) &&
+   require(ggforce) && require(concaveman) && require(ggplot2) &&
+   require(data.table) && require(udpipe))
+\{
+}
 library(igraph)
 library(ggraph)
 library(concaveman)
+library(ggplot2)
 library(BTM)
 data(example_btm, package = 'textplot')
 group_terms   <- terms(example_btm, top_n = 3)
@@ -72,4 +79,9 @@ textplot_bitermclusters(x = group_terms, biterms = group_biterms,
                         title = "Biterm topic model", subtitle = "some topics",
                         which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
                         labels = topiclabels)
+
+\dontshow{
+\}
+# End of main if statement running only if the required packages are installed
+}
 }

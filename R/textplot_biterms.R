@@ -7,10 +7,17 @@
 #'
 #' @docType data
 #' @examples
+#' \dontshow{if(require(BTM))
+#' \{
+#' }
 #' library(BTM)
-#' data(example_btm)
+#' data(example_btm, package = 'textplot')
 #' example_btm
 #' str(example_btm)
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 NULL
 
 #' @title Plot function for a BTM object
@@ -29,9 +36,17 @@ NULL
 #' @method plot BTM
 #' @seealso \code{\link[BTM]{BTM}}, \code{\link{textplot_bitermclusters.default}}
 #' @examples
+#' \dontshow{
+#' if(require(igraph) && require(BTM) && require(ggraph) &&
+#'    require(ggforce) && require(concaveman) &&
+#'    require(data.table) && require(udpipe))
+#' \{
+#' }
 #' library(igraph)
 #' library(BTM)
 #' library(ggraph)
+#' library(ggforce)
+#' library(concaveman)
 #' data(example_btm, package = 'textplot')
 #'
 #' model <- example_btm
@@ -81,6 +96,11 @@ NULL
 #'              biterms = biterms, trace = 100)
 #' plot(model)
 #' }
+#'
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 plot.BTM <- function(x,
                      biterms = terms(x, type = "biterms")$biterms,
                      top_n = 7, which,
@@ -129,9 +149,16 @@ textplot_bitermclusters <- function(x, ...){
 #' @return an object of class ggplot
 #' @export
 #' @examples
+#' \dontshow{
+#' if(require(igraph) && require(BTM) && require(ggraph) &&
+#'    require(ggforce) && require(concaveman) && require(ggplot2) &&
+#'    require(data.table) && require(udpipe))
+#' \{
+#' }
 #' library(igraph)
 #' library(ggraph)
 #' library(concaveman)
+#' library(ggplot2)
 #' library(BTM)
 #' data(example_btm, package = 'textplot')
 #' group_terms   <- terms(example_btm, top_n = 3)
@@ -161,6 +188,11 @@ textplot_bitermclusters <- function(x, ...){
 #'                         title = "Biterm topic model", subtitle = "some topics",
 #'                         which = c(3, 4, 5, 6, 7, 9, 12, 16, 20),
 #'                         labels = topiclabels)
+#'
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 textplot_bitermclusters.default <- function(x, biterms,
                                             which, labels = seq_len(length(table(biterms$topic))),
                                             title = "Biterm topic model", subtitle = list(), ...){
@@ -228,10 +260,14 @@ textplot_bitermclusters.default <- function(x, biterms,
     ggraph::geom_node_text(ggplot2::aes(label = name, size = probability), col = "black") +
     ggplot2::theme_void() + ggplot2::theme(legend.position = "none") +
     ggplot2::labs(title = title, subtitle = subtitle)
-  if(donotdrawlabels){
-    g + ggforce::geom_mark_hull(ggplot2::aes(x, y, group = topic, fill = topic), concavity = 4, expand = ggplot2::unit(5, "mm"), alpha = 0.25)
+  if(requireNamespace("concaveman")){
+    if(donotdrawlabels){
+      g + ggforce::geom_mark_hull(ggplot2::aes(x, y, group = topic, fill = topic), concavity = 4, expand = ggplot2::unit(5, "mm"), alpha = 0.25)
+    }else{
+      g + ggforce::geom_mark_hull(ggplot2::aes(x, y, group = topic, fill = topic, label = topic), concavity = 4, expand = ggplot2::unit(5, "mm"), alpha = 0.25)
+    }
   }else{
-    g + ggforce::geom_mark_hull(ggplot2::aes(x, y, group = topic, fill = topic, label = topic), concavity = 4, expand = ggplot2::unit(5, "mm"), alpha = 0.25)
+    message("Please install package concaveman in order to draw the convex hull around the text clusters")
   }
 }
 
