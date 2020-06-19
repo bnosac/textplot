@@ -34,13 +34,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-
       - uses: r-lib/actions/setup-pandoc@master
-
+      - uses: r-lib/actions/setup-tinytex@v1
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -70,8 +68,17 @@ jobs:
           install.packages("BiocManager")
           BiocManager::install("graph")
           BiocManager::install("Rgraphviz")          
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
+          install.packages("knitr")
+          install.packages("udpipe")
+          install.packages("BTM")
+          install.packages("igraph")
+          install.packages("qgraph")
+          install.packages("glasso")
+          install.packages("ggplot2")
+          install.packages("ggraph")
+          install.packages("ggforce")
+          install.packages("concaveman")
+          remotes::install_deps(pkgdir = ".", dependencies = TRUE)
         shell: Rscript {0}
 
       - name: Session info
@@ -84,13 +91,12 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
+        run:  |
+          R CMD INSTALL ../textplot
+          R CMD build .
+          R CMD check --as-cran --no-manual --no-vignettes --no-tests --run-donttest *tar.gz
+          R CMD check --as-cran --no-manual --no-vignettes *tar.gz
+          R CMD check --as-cran --no-manual *tar.gz
 
       - name: Upload check results
         if: failure()
