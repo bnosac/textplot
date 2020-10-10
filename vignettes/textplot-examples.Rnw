@@ -74,8 +74,9 @@ plt
 \subsection{Biterm Topic Model plots}
 \subsubsection{Example 1}
 This example shows plotting a biterm topic model which was pretrained and put in the package as an example.
-<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6, out.width = '\\textwidth'>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6, out.width = '\\textwidth'>>=
 library(BTM)
+library(ggplot2)
 library(ggraph)
 library(ggforce)
 library(concaveman)
@@ -87,7 +88,7 @@ plt
 @
 
 \newpage
-<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=8, fig.height=6>>=
 plt <- plot(model, title = "Biterm topic model", subtitle = "Topics 2 to 8",
             which = 2:8, top_n = 7)
 plt
@@ -111,8 +112,9 @@ biterms <- biterms[, cooccurrence(x = lemma,
                                   skipgram = 2),
                      by = list(doc_id)]
 @
-<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), results="hide", fig.width=8, fig.height=6>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), results="hide", fig.width=8, fig.height=6>>=
 library(BTM)
+library(ggplot2)
 library(ggraph)
 library(ggforce)
 library(concaveman)
@@ -132,8 +134,9 @@ plt
 \subsection{Biterm relationships}
 \subsubsection{Example showing objects of verbs and adjectives modifying nouns}
 The below example shows the objects of verbs as well as which adjectives modify nouns. These are displayed as 2 clusters. We start from the annotation of the AirBnB data shown in the previous section \ref{anno}.
-<<eval=(require(BTM, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), fig.width=8, fig.height=8>>=
+<<eval=(require(BTM, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggforce, quietly = TRUE) && require(concaveman, quietly = TRUE) && require(igraph, quietly = TRUE) && require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), fig.width=8, fig.height=8>>=
 library(BTM)
+library(ggplot2)
 library(ggraph)
 library(ggforce)
 library(concaveman)
@@ -171,7 +174,7 @@ plt
 \subsection{Bar plots}
 \subsubsection{Example showing frequency of adjectives}
 The plot below shows a simple barplot which works on the output of table.
-<<fig.width=5.5, fig.height=5.5>>=
+<<eval=(require(udpipe, quietly = TRUE)), fig.width=5.5, fig.height=5.5>>=
 library(udpipe)
 data("brussels_reviews_anno", package = "udpipe")
 x   <- subset(brussels_reviews_anno, xpos %in% "JJ")

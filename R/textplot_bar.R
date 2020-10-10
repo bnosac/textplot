@@ -46,13 +46,19 @@ textplot_bar <- function(x, ...){
 #' @return the result of a call to \code{lattice::dotplot}
 #' @export
 #' @examples
+#' \dontshow{if(require(udpipe))
+#' \{
+#' }
 #' data(brussels_listings, package = 'udpipe')
 #' x <- table(brussels_listings$neighbourhood)
 #' x <- sort(x)
 #' textplot_bar(x,
 #'  panel = "Locations", col.panel = "darkgrey", xlab = "Listings",
 #'  cextext = 0.75, addpct = TRUE, cexpct = 0.5)
-#'
+#' \dontshow{
+#' \}
+#' # End of main if statement running only if the required packages are installed
+#' }
 #'
 #' x <- sample(LETTERS, 1000, replace = TRUE)
 #' textplot_bar(sort(table(x)), panel = "Frequencies", xlab = "Frequency",

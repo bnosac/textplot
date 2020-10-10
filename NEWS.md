@@ -1,3 +1,7 @@
+## CHANGES IN textplot VERSION 0.1.4
+
+- Make example conditionally on availability of udpipe
+
 ## CHANGES IN textplot VERSION 0.1.3
 
 - Changes regarding running examples only if packages are available (in casu ggforce which depends on concaveman which depends on V8, which triggered these changes)
