@@ -25,6 +25,7 @@ options(prompt = "R> ", continue = "+   ")
 options(prompt = " ", continue = "   ")
 set.seed(123456789)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.align = "center")
+library(textplot)
 @
 
 \section{General}
