@@ -1,3 +1,7 @@
+## CHANGES IN textplot VERSION 0.2.0
+
+- Added textplot_embedding_2d
+
 ## CHANGES IN textplot VERSION 0.1.4
 
 - Make example conditionally on availability of udpipe
