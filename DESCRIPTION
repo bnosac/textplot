@@ -9,7 +9,7 @@ Authors@R: c(
     person("Sacha Epskamp", role = c("ctb", "cph"), comment = "code in R/matrix_reduction.R adapted from the qgraph package version 1.4.0 which is GPL-2 licensed"),
     person("Ingo Feinerer and Kurt Hornik", role = c("ctb", "cph"), comment = "partial code in R/textplot_corlines.R adapted from the tm package version 0.4 which is GPL-2 licensed"))
 Description: Visualise complex relations in texts. This is done by providing functionalities for displaying 
-    text co-occurrence networks, text correlation networks, dependency relationships as well as text clustering and text embeddings. 
+    text co-occurrence networks, text correlation networks, dependency relationships as well as text clustering and semantic text 'embeddings'. 
     Feel free to join the effort of providing interesting text visualisations.
 License: GPL-2
 URL: https://github.com/bnosac/textplot
