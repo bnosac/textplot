@@ -3,7 +3,7 @@
 \name{textplot_embedding_2d}
 \alias{textplot_embedding_2d}
 \alias{textplot_embedding_2d.default}
-\title{Plot word embeddings in 2D.}
+\title{Plot word embeddings in 2D}
 \usage{
 textplot_embedding_2d(x, ...)
 
@@ -36,8 +36,8 @@ textplot_embedding_2d(x, ...)
 an object of class ggplot
 }
 \description{
-This plot displays words in 2D, optionally grouped by cluster.\cr
-This allows to visualise embeddings which are reduced by dimensionality reduction techniques like UMAP, PCA or similar techniques.
+This plot displays words in 2 dimensions, optionally grouped by cluster.\cr
+This allows to visualise embeddings which are reduced by dimensionality reduction techniques like UMAP, t-SNE, PCA or similar techniques.
 It allows to highlight the words by groups and is a good way to visualise a small sets of word or topic embeddings.
 }
 \examples{

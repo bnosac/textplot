@@ -9,7 +9,7 @@ NULL
 
 
 #' @name example_embedding_clusters
-#' @title Example words emitted in a ETM text clustering model 
+#' @title Example words emitted in a ETM text clustering model
 #' @description Example words emitted in a ETM text clustering model constructed upon the be_parliament_2020 dataset in the doc2vec R package
 #' @docType data
 #' @examples
@@ -29,9 +29,9 @@ textplot_embedding_2d <- function(x, ...){
 
 
 #' @rdname textplot_embedding_2d
-#' @title Plot word embeddings in 2D.
-#' @description This plot displays words in 2D, optionally grouped by cluster.\cr
-#' This allows to visualise embeddings which are reduced by dimensionality reduction techniques like UMAP, PCA or similar techniques.
+#' @title Plot word embeddings in 2D
+#' @description This plot displays words in 2 dimensions, optionally grouped by cluster.\cr
+#' This allows to visualise embeddings which are reduced by dimensionality reduction techniques like UMAP, t-SNE, PCA or similar techniques.
 #' It allows to highlight the words by groups and is a good way to visualise a small sets of word or topic embeddings.
 #' @param x a data.frame with columns 'x', 'y', 'term' and optionally 'group' (color by group), 'weight' (size of the text / point shown), 'type' (pch used for the type of point)
 #' @param title character string with the title to use in the plot
