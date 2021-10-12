@@ -1,3 +1,8 @@
+## CHANGES IN textplot VERSION 0.2.1
+
+- Fix bug in textplot_bitermclusters.default (and plot.BTM as it uses textplot_bitermclusters.default) which 
+  unintentionally left the option open that if a biterm which was assigned to several topics it could be shown in one of the 2 topics by chance depending on the order of the biterms data. This could only occur if the most emitted words by each of these 2 topics were the same. See issue #7.
+
 ## CHANGES IN textplot VERSION 0.2.0
 
 - Added textplot_embedding_2d

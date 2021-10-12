@@ -227,7 +227,7 @@ textplot_bitermclusters.default <- function(x, biterms,
   if(!missing(which)){
     biterms <- biterms[biterms$topic %in% which, ]
   }
-  biterms <- biterms[, topic_freq := .N, by = list(term1, term2)]
+  biterms <- biterms[, topic_freq := .N, by = list(term1, term2, topic)]
   biterms <- biterms[, list(best_topic = topic[which.max(topic_freq)], cooc = .N), by = list(term1, term2)]
   # biterms <- biterms[, list(best_topic = utils::head(base::names(base::sort(base::table(topic), decreasing = TRUE)), 1),
   #                           cooc = .N), by = list(term1, term2)]
