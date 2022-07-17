@@ -18,6 +18,7 @@ textplot_dependencyparser <- function(x, ...){
 #' @param edge_color character with the color of the edges between the nodes. Defaults to red.
 #' @param size size of the labels in the plot. Defaults to 3.
 #' @param base_family character passed on to \code{theme_void} setting the base font family
+#' @param layout the type of layout, defaults to 'linear', passed on to \code{\link[ggraph]{ggraph}}
 #' @param ... not used yet
 #' @return an object of class ggplot
 #' @seealso \code{\link[udpipe]{udpipe}}
@@ -57,6 +58,7 @@ textplot_dependencyparser.default <- function(x,
                                               edge_color = "red",
                                               size = 3,
                                               base_family = "",
+                                              layout = "linear",
                                               ...){
   stopifnot(is.data.frame(x) & all(c("sentence_id", "token_id", "head_token_id", "dep_rel",
                                      "token_id", "token", "upos") %in% colnames(x)))
@@ -75,7 +77,7 @@ textplot_dependencyparser.default <- function(x,
                                      vertices = x[, c("token_id", "token", "upos")],
                                      directed = TRUE)
 
-  ggraph::ggraph(g, layout = "linear") +
+  ggraph::ggraph(g, layout = layout) +
     ggraph::geom_edge_arc(ggplot2::aes(label = dep_rel, vjust = -0.20),
                   arrow = grid::arrow(length = ggplot2::unit(4, 'mm'), ends = "last", type = "closed"),
                   end_cap = ggraph::label_rect("wordswordswords"),

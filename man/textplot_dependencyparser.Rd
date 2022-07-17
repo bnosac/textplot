@@ -15,6 +15,7 @@ textplot_dependencyparser(x, ...)
   edge_color = "red",
   size = 3,
   base_family = "",
+  layout = "linear",
   ...
 )
 }
@@ -34,6 +35,8 @@ textplot_dependencyparser(x, ...)
 \item{size}{size of the labels in the plot. Defaults to 3.}
 
 \item{base_family}{character passed on to \code{theme_void} setting the base font family}
+
+\item{layout}{the type of layout, defaults to 'linear', passed on to \code{\link[ggraph]{ggraph}}}
 }
 \value{
 an object of class ggplot

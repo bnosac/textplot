@@ -1,3 +1,7 @@
+## CHANGES IN textplot VERSION 0.2.2
+
+- textplot_dependencyparser.default now gains an argument layout, allowing to change the layout to something else than 'linear'
+
 ## CHANGES IN textplot VERSION 0.2.1
 
 - Fix bug in textplot_bitermclusters.default (and plot.BTM as it uses textplot_bitermclusters.default) which 
