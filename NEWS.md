@@ -1,6 +1,7 @@
 ## CHANGES IN textplot VERSION 0.2.3
 
 - textplot_embedding_2d - do no link to documentation of archived package ggalt
+- vignette: add extra evaluation filter in case model download fails
 
 ## CHANGES IN textplot VERSION 0.2.2
 
