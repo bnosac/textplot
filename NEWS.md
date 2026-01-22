@@ -1,3 +1,7 @@
+## CHANGES IN textplot VERSION 0.2.3
+
+- textplot_embedding_2d - do no link to documentation of archived package ggalt
+
 ## CHANGES IN textplot VERSION 0.2.2
 
 - textplot_dependencyparser.default now gains an argument layout, allowing to change the layout to something else than 'linear'

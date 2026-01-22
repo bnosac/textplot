@@ -26,7 +26,7 @@ textplot_embedding_2d(x, ...)
 
 \item{subtitle}{character string with the subtitle to use in the plot}
 
-\item{encircle}{logical indicating to encircle all the points belonging to a group using \code{\link[ggalt]{geom_encircle}}}
+\item{encircle}{logical indicating to encircle all the points belonging to a group using \code{geom_encircle} from the ggalt package}
 
 \item{points}{logical indicating to add points. Defaults to \code{FALSE}.}
 
