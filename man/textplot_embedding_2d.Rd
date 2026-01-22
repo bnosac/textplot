@@ -30,7 +30,7 @@ textplot_embedding_2d(x, ...)
 
 \item{points}{logical indicating to add points. Defaults to \code{FALSE}.}
 
-\item{alpha}{transparancy level passed on to \code{\link[ggalt]{geom_encircle}} in case \code{encircle} is set to \code{TRUE}}
+\item{alpha}{transparancy level passed on to \code{geom_encircle} from the ggalt package in case \code{encircle} is set to \code{TRUE}}
 }
 \value{
 an object of class ggplot

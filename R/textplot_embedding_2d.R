@@ -37,7 +37,7 @@ textplot_embedding_2d <- function(x, ...){
 #' @param title character string with the title to use in the plot
 #' @param subtitle character string with the subtitle to use in the plot
 #' @param encircle logical indicating to encircle all the points belonging to a group using \code{geom_encircle} from the ggalt package
-#' @param alpha transparancy level passed on to \code{\link[ggalt]{geom_encircle}} in case \code{encircle} is set to \code{TRUE}
+#' @param alpha transparancy level passed on to \code{geom_encircle} from the ggalt package in case \code{encircle} is set to \code{TRUE}
 #' @param points logical indicating to add points. Defaults to \code{FALSE}.
 #' @param ... not used yet
 #' @return an object of class ggplot
