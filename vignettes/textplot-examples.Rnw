@@ -64,7 +64,7 @@ plt
 \newpage
 \subsubsection{Example 2}
 The following visualisation displays the dependency parser results on some larger sentence. Note that this function works only on 1 sentence.
-<<eval=(require(udpipe, quietly = TRUE) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=12, fig.height=6, out.width = '1\\textwidth', out.height = '0.5\\textwidth'>>=
+<<eval=(require(udpipe, quietly = TRUE) && (!udpipe::udpipe_download_model(language = "english", overwrite = FALSE)$download_failed) && require(ggraph, quietly = TRUE) && require(ggplot2, quietly = TRUE) && require(igraph, quietly = TRUE)), fig.width=12, fig.height=6, out.width = '1\\textwidth', out.height = '0.5\\textwidth'>>=
 x <- udpipe("UDPipe provides tokenization, tagging, lemmatization and
              dependency parsing of raw text", "english")
 plt <- textplot_dependencyparser(x, size = 4)
@@ -99,7 +99,7 @@ plt
 
 \subsubsection{Example 2} \label{anno}
 This example shows building a biterm topic model on nouns, adjectives and proper nouns occurring in the neighbourhood of one another and next plotting this model.
-<<eval=(require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE)), results="hide", fig.width=8, fig.height=6>>=
+<<eval=(require(data.table, quietly = TRUE) && require(udpipe, quietly = TRUE) && (!udpipe::udpipe_download_model(language = "dutch", overwrite = FALSE)$download_failed)), results="hide", fig.width=8, fig.height=6>>=
 library(data.table)
 library(udpipe)
 ## Annotate text with parts of speech tags
